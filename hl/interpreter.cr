@@ -83,7 +83,7 @@ class HL::Interpreter
         when '@' then @r = @loop_stack.last[2] if @loop_stack.size > 0
         when '$' then @r = @stack.size.to_i64
         when '#' then @r = @stack[@r] if @stack.size > @r
-        when '^' then @stack.delete_at(@r) #if @stack.size > @r
+        when '^' then @stack.delete_at(@r) if @stack.size > @r
         when '[' then @ignore += 1_i64 if @r == 0 || @ignore > 0
         when ']' then @ignore -= 1_i64 if @ignore > 0
         end
