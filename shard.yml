@@ -1,0 +1,14 @@
+name: hlang
+version: 0.1.0
+
+authors:
+  - deepivin <marek12306@gmail.com>
+
+description: |
+  Hlang interpreter/REPL
+
+dependencies:
+  readline:
+    github: crystal-lang/crystal-readline
+
+license: MIT
