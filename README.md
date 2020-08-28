@@ -12,6 +12,16 @@ $ shards install
 $ crystal build main.cr -o hl --release
 ```
 
+## Examples
+| File      | Result                                      |
+|-----------|---------------------------------------------|
+| 69        | Prints 69 on screen                         |
+| abcd      | Prints letters from A to Z                  |
+| abcd_loop | Prints letters from A to Z in infinite loop |
+| bruh      | BRUH!                                       |
+| fib       | Prints first 6 numbers of fibonacci         |
+| h_kbd     | Prints H if H is pressed                    |
+
 ## Specification
 
 - 1 64-bit register
