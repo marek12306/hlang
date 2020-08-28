@@ -44,6 +44,8 @@ $ crystal build main.cr -o hl --release
 | =    | sets register to 1 if first item of stack is equal to second else sets to 0 |
 | (    | loops as many times as there are in register                                |
 | )    | loop end                                                                    |
+| [    | executes code if register != 0 (simple if)                                  |
+| ]    | end of if                                                                   |
 | @    | loop index                                                                  |
 
 Other characters are ignored.
