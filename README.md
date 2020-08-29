@@ -21,6 +21,7 @@ $ crystal build main.cr -o hl --release
 | bruh      | BRUH!                                       |
 | fib       | Prints first 6 numbers of fibonacci         |
 | h_kbd     | Prints H if H is pressed                    |
+| thinking  | Shows thinking emoji                        |
 
 ## Specification
 
