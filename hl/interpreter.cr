@@ -48,7 +48,7 @@ class HL::Interpreter
     def step
         c = @input[@i]
         if !IGNORE_CHARS.includes?(c) && @ignore > 0
-            @loop_stack.last[2] += 1_i64 if @loop_stack.size > 0
+            @loop_stack[-1][2] += 1_i64 if @loop_stack.size > 0
             return @i += 1_i64 
         end
 
@@ -74,13 +74,13 @@ class HL::Interpreter
             end
         when ')'
             if @loop_stack.size > 0
-                @loop_stack.last[0] -= 1_i64 if @loop_stack.last[0] != -1
-                @i = @loop_stack.last[1] if @loop_stack.last[0] > 0 || @loop_stack.last[0] == -1
-                @loop_stack.pop if @loop_stack.last[0] == 0
+                @loop_stack[-1][0] -= 1_i64 if @loop_stack[-1][0] != -1
+                @i = @loop_stack[-1][1] if @loop_stack[-1][0] > 0 || @loop_stack[-1][0] == -1
+                @loop_stack.pop if @loop_stack[-1][0] == 0
             else
                 @ignore -= 1_i64
             end
-        when '@' then @r = @loop_stack.last[2] if @loop_stack.size > 0
+        when '@' then @r = @loop_stack[-1][2] if @loop_stack.size > 0
         when '$' then @r = @stack.size.to_i64
         when '#' then @r = @stack[@r] if @stack.size > @r
         when '^' then @stack.delete_at(@r) if @stack.size > @r
@@ -89,6 +89,6 @@ class HL::Interpreter
         end
 
         @i += 1_i64
-        @loop_stack.last[2] += 1_i64 if @loop_stack.size > 0
+        @loop_stack[-1][2] += 1_i64 if @loop_stack.size > 0
     end
 end

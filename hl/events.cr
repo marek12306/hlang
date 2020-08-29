@@ -7,8 +7,10 @@ module HL::Events
     end
 
     def invoke(name : String, data : String)
-        @handlers.select { |h| h[0] == name }.each do |h|
-            h[1].call data
+        handlers = @handlers.select { |h| h[0] == name }
+        i = 0
+        while i < handlers.size
+            handlers[i][1].call data
         end
     end
 end
