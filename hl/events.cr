@@ -11,6 +11,7 @@ module HL::Events
         i = 0
         while i < handlers.size
             handlers[i][1].call data
+            i += 1
         end
     end
 end
