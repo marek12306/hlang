@@ -4,7 +4,7 @@ Weird and completly useless esoteric programming language with H letter and symb
 Features:
 - Interpreter
 - REPL
-- Translation from/to English
+- Translation from/into English
 
 ## Building
 ```
