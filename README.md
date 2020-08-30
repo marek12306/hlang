@@ -9,7 +9,7 @@ Features:
 ## Building
 ```
 $ shards install
-$ crystal build main.cr -o hl --release
+$ crystal build main.cr -o h --release
 ```
 
 ## Examples
