@@ -86,6 +86,8 @@ class HL::Interpreter
         when '^' then @stack.delete_at(@r) if @stack.size > @r
         when '[' then @ignore += 1_i64 if @r == 0 || @ignore > 0
         when ']' then @ignore -= 1_i64 if @ignore > 0
+        when 'g' then raise "Please remove any g letters in your code. It's for your safety."
+        when 'G' then raise "Please remove any G letters in your code. It's for your safety."
         end
 
         @i += 1_i64
