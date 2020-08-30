@@ -48,5 +48,8 @@ $ crystal build main.cr -o hl --release
 | [    | executes code if register != 0 (simple if)                                  |
 | ]    | end of if                                                                   |
 | @    | loop index                                                                  |
+| $    | Stack size                                                                  |
+| #    | Gets item from stack (register is index)                                    |
+| ^    | Deletes item from stack (register is index)                                 |
 
 Other characters are ignored.
