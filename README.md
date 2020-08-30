@@ -15,7 +15,7 @@ $ crystal build main.cr -o hl --release
 ## Examples
 | File      | Result                                      |
 |-----------|---------------------------------------------|
-| 69        | Prints 69 on screen                         |
+| 69        | Prints number 69                            |
 | abcd      | Prints letters from A to Z                  |
 | abcd_loop | Prints letters from A to Z in infinite loop |
 | bruh      | BRUH!                                       |
