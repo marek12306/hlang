@@ -9,6 +9,7 @@ run = false
 repl = false
 translator = false
 to_hf = false
+generator = false
 
 macro input_options
   parser.on("-f FILE", "--file=FILE", "File input") { |file|
@@ -34,6 +35,7 @@ parser = OptionParser.parse do |parser|
     parser.banner = "Hlang Interpreter"
     input_options
   end
+
   parser.on("translate", "Translate program from hlang to english and vice versa") do
     translator = true
     parser.banner = "Hlang code translator"
@@ -45,6 +47,11 @@ parser = OptionParser.parse do |parser|
       to_hf = false
       input_options
     end
+  end
+
+  parser.on("generate", "Generate program from text file") do
+    generator = true
+    input_options
   end
 
   parser.on("repl", "Run REPL console") do
@@ -82,6 +89,10 @@ elsif translator
   else
     puts HL::Translator.to_eng input
   end
+elsif generator
+  no_input
+
+  puts HL::Generator.gen input
 elsif repl
   loop do
     x = Readline.readline("#{interpreter.r}> ")

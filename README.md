@@ -5,6 +5,7 @@ Features:
 - Interpreter
 - REPL
 - Translation from/into English
+- Code generation from text
 
 ## Building
 ```
