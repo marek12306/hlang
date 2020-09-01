@@ -5,7 +5,7 @@ module HL::Generator
         i = 0
         j = 0
         while i < input.size
-            print "#{(i / input.size * 100).round.to_i}% (#{i} of #{input.size})\r"
+            # print "#{(i / input.size * 100).round.to_i}% (#{i} of #{input.size})\r"
 
             c = input[i].ord
 
