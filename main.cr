@@ -10,6 +10,7 @@ repl = false
 translator = false
 to_hf = false
 generator = false
+verbose = false
 
 macro input_options
   parser.on("-f FILE", "--file=FILE", "File input") { |file|
@@ -51,6 +52,9 @@ parser = OptionParser.parse do |parser|
 
   parser.on("generate", "Generate program from text file") do
     generator = true
+    parser.on("-v", "--verbose", "Verbose mode") { 
+      verbose = true 
+    }
     input_options
   end
 
@@ -92,7 +96,7 @@ elsif translator
 elsif generator
   no_input
 
-  puts HL::Generator.gen input
+  puts HL::Generator.gen input, verbose
 elsif repl
   loop do
     x = Readline.readline("#{interpreter.r}> ")

@@ -1,11 +1,11 @@
 module HL::Generator
-    def self.gen(input)
+    def self.gen(input, verbose)
         output = ""
 
         i = 0
         j = 0
         while i < input.size
-            # print "#{(i / input.size * 100).round.to_i}% (#{i} of #{input.size})\r"
+            print "#{(i / input.size * 100).round.to_i}% (#{i} of #{input.size})\r" if verbose
 
             c = input[i].ord
 
