@@ -1,5 +1,5 @@
 module HL::Generator
-    def self.gen(input, verbose)
+    def self.gen(input, verbose, method = 0)
         output = ""
 
         i = 0
@@ -9,18 +9,56 @@ module HL::Generator
 
             c = input[i].ord
 
+            temp = ""
+
             if j < c
-                output += "H" * (c - j)
+                temp += "H" * (c - j)
                 j = c
             else
-                output += "h" * (j - c)
+                temp += "h" * (j - c)
                 j = c
             end
 
-            output += "!"
+            temp += "!"
+            
+            # num = HL::Utils.check_char(temp, 'H') - HL::Utils.check_char(temp, 'h')
+            # if num > 1 && HL::Utils.prime_factors(num).size > 1 && temp.size > 10
+            #     temp = "_"+self.optimize(temp) + "!_"
+            #     print "#{input[i]} "
+            #     j = 0
+            # end
+
+            output += temp
             i += 1
         end
 
+        output
+    end
+    
+    def self.optimize(input, j = 0)
+        output = "."
+        num = HL::Utils.check_char(input, 'H') - HL::Utils.check_char(input, 'h')
+        
+        if num == 1
+            output += "_H,"
+        elsif num == 0
+            output +=  "_,"
+        else
+            factors = HL::Utils.prime_factors(num)
+            factors.each do |factor|
+                if factor == j
+                    output += ","
+                elsif j > factor
+                    output += "h" * (j - factor) + ","
+                else
+                    output += "H" * (factor - j) + ","
+                end
+                j = factor
+            end
+        end
+    
+        output += "*"
+        # puts "#{input} #{output}"
         output
     end
 end
