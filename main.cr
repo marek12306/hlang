@@ -11,6 +11,7 @@ translator = false
 to_hf = false
 generator = false
 verbose = false
+output_file = ""
 
 macro input_options
   parser.on("-f FILE", "--file=FILE", "File input") { |file|
@@ -55,6 +56,9 @@ parser = OptionParser.parse do |parser|
     parser.on("-v", "--verbose", "Verbose mode") { 
       verbose = true 
     }
+    parser.on("-o FILE", "--output=FILE", "Output to file") { |_output_file|
+      output_file = _output_file
+    }
     input_options
   end
 
@@ -96,7 +100,12 @@ elsif translator
 elsif generator
   no_input
 
-  puts HL::Generator.gen input, verbose
+  output = HL::Generator.gen input, verbose
+  if output_file != ""
+    File.write(output_file, output)
+  else
+    puts output
+  end
 elsif repl
   loop do
     x = Readline.readline("#{interpreter.r}> ")
