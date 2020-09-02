@@ -1,4 +1,6 @@
 module HL::Generator
+    OPTIMALIZATION_THRESHOLD = 20
+
     def self.gen(input, verbose, method = 0)
         output = ""
 
@@ -9,24 +11,19 @@ module HL::Generator
 
             c = input[i].ord
 
-            temp = ""
-
             if j < c
-                temp += "H" * (c - j)
+                num = c - j
+                temp = "H" * num
                 j = c
             else
-                temp += "h" * (j - c)
+                num = j - c
+                temp = "h" * num
                 j = c
             end
+            
+            temp = "_" + self.optimize("H" * c) if num > OPTIMALIZATION_THRESHOLD
 
             temp += "!"
-            
-            # num = HL::Utils.check_char(temp, 'H') - HL::Utils.check_char(temp, 'h')
-            # if num > 1 && HL::Utils.prime_factors(num).size > 1 && temp.size > 10
-            #     temp = "_"+self.optimize(temp) + "!_"
-            #     print "#{input[i]} "
-            #     j = 0
-            # end
 
             output += temp
             i += 1
@@ -35,7 +32,8 @@ module HL::Generator
         output
     end
     
-    def self.optimize(input, j = 0)
+    def self.optimize(input)
+        j = 0
         output = "."
         num = HL::Utils.check_char(input, 'H') - HL::Utils.check_char(input, 'h')
         
@@ -44,7 +42,7 @@ module HL::Generator
         elsif num == 0
             output +=  "_,"
         else
-            factors = HL::Utils.prime_factors(num)
+            factors = HL::Utils.prime_factors(num.abs)
             factors.each do |factor|
                 if factor == j
                     output += ","
@@ -56,9 +54,9 @@ module HL::Generator
                 j = factor
             end
         end
+
+        output += "_h," if num < 0
     
         output += "*"
-        # puts "#{input} #{output}"
-        output
     end
 end
