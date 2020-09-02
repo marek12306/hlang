@@ -1,7 +1,7 @@
 module HL::Generator
     OPTIMALIZATION_THRESHOLD = 20
 
-    def self.gen(input, verbose, method = 0)
+    def self.gen(input, verbose)
         output = ""
 
         i = 0
