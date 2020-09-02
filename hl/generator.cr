@@ -4,11 +4,9 @@ module HL::Generator
     def self.gen(input, verbose)
         output = ""
 
-        i = 0
-        j = 0
+        i = j = 0
         while i < input.size
             print "#{(i / input.size * 100).round.to_i}% (#{i} of #{input.size})\r" if verbose
-
             c = input[i].ord
 
             if j < c
@@ -21,8 +19,8 @@ module HL::Generator
             j = c
             
             temp = "_" + self.optimize("H" * c) + "!" if num > OPTIMALIZATION_THRESHOLD
-
             output += temp
+
             i += 1
         end
 
@@ -30,12 +28,11 @@ module HL::Generator
     end
     
     def self.optimize(input)
-        j = 0
         output = "."
         num = HL::Utils.check_char(input, 'H') - HL::Utils.check_char(input, 'h')
         factors = HL::Utils.prime_factors(num.abs)
 
-        i = 0
+        i = j = 0
         while i < factors.size
             factor = factors[i]
             if j > factor
