@@ -67,18 +67,15 @@ class HL::Interpreter
         when '<' then @r = read_char
         when '=' then @r = @stack.size > 1 && (@stack[0] == @stack[1]) ? 1_i64 : 0_i64
         when '('
-            if @r > 0 || @r == -1
-                @loop_stack << [@r, @i, 0_i64]
-            else
-                @ignore += 1_i64
+            if @r > 0 || @r == -1;  @loop_stack << [@r, @i, 0_i64]
+            else; @ignore += 1_i64
             end
         when ')'
             if @loop_stack.size > 0
                 @loop_stack[-1][0] -= 1_i64 if @loop_stack[-1][0] != -1
                 @i = @loop_stack[-1][1] if @loop_stack[-1][0] > 0 || @loop_stack[-1][0] == -1
                 @loop_stack.pop if @loop_stack[-1][0] == 0
-            else
-                @ignore -= 1_i64
+            else; @ignore -= 1_i64
             end
         when '@' then @r = @loop_stack[-1][2] if @loop_stack.size > 0
         when '$' then @r = @stack.size.to_i64

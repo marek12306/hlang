@@ -1,5 +1,8 @@
 module HL::Utils
     def self.prime_factors(n)
+        return [0] if n == 0
+        return [1] if n == 1
+
         output = [] of Int32
     
         while n % 2 == 0

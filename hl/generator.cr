@@ -13,17 +13,14 @@ module HL::Generator
 
             if j < c
                 num = c - j
-                temp = "H" * num
-                j = c
+                temp = "H" * num + "!"
             else
                 num = j - c
-                temp = "h" * num
-                j = c
+                temp = "h" * num + "!"
             end
+            j = c
             
-            temp = "_" + self.optimize("H" * c) if num > OPTIMALIZATION_THRESHOLD
-
-            temp += "!"
+            temp = "_" + self.optimize("H" * c) + "!" if num > OPTIMALIZATION_THRESHOLD
 
             output += temp
             i += 1
@@ -36,23 +33,19 @@ module HL::Generator
         j = 0
         output = "."
         num = HL::Utils.check_char(input, 'H') - HL::Utils.check_char(input, 'h')
-        
-        if num == 1
-            output += "_H,"
-        elsif num == 0
-            output +=  "_,"
-        else
-            factors = HL::Utils.prime_factors(num.abs)
-            factors.each do |factor|
-                if factor == j
-                    output += ","
-                elsif j > factor
-                    output += "h" * (j - factor) + ","
-                else
-                    output += "H" * (factor - j) + ","
-                end
-                j = factor
+        factors = HL::Utils.prime_factors(num.abs)
+
+        i = 0
+        while i < factors.size
+            factor = factors[i]
+            if j > factor
+                output += "h" * (j - factor)
+            elsif factor != j
+                output += "H" * (factor - j)
             end
+            output += ","
+            j = factor
+            i += 1
         end
 
         output += "_h," if num < 0
